@@ -40,8 +40,8 @@ public class Session{
         return (token != null);
     }
 
-    public boolean validate(String username, String password) {
-        if (username.equals("elynur") && password.equals("123")) {
+    public boolean validate(String username, String password, String confirm) {
+        if (username.equals("elynur") && password.equals("123") && confirm.equals("123")) {
             setSession(username);
             return true;
         }

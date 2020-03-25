@@ -34,8 +34,14 @@ public class LoginActivity extends AppCompatActivity {
             passValue = passwordInput.getText().toString();
             confirmValue = confirmInput.getText().toString();
 
-            boolean success = session.validate(usernameValue, passValue);
-            if (usernameInput != null && passwordInput != null && confirmInput.equals(passwordInput) ){
+            if (usernameInput.equals("")){
+                usernameInput.setError("Isi data");
+            } else if (passwordInput.equals("")) {
+                passwordInput.setError("Isi data");
+            } else if (passwordInput!=confirmInput){
+                confirmInput.setError("Password harus sama");
+            } else {
+                boolean success = session.validate(usernameValue, passValue, confirmValue);
                 if (success) {
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
@@ -43,11 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Snackbar.make(view, "Authentication Failed", Snackbar.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(this, "Data masih salah", Toast.LENGTH_SHORT).show();
             }
-
-
-
         }
     }
