@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.pass);
         confirmInput = findViewById(R.id.confirm);
 
-        session = Application.getSession();
+        session = new Session(this);
     }
 
         public void handleLogin (View view){
@@ -34,21 +34,23 @@ public class LoginActivity extends AppCompatActivity {
             passValue = passwordInput.getText().toString();
             confirmValue = confirmInput.getText().toString();
 
-            if (usernameInput.equals("")){
+            if (usernameValue.equals("")){
                 usernameInput.setError("Isi data");
-            } else if (passwordInput.equals("")) {
+            } else if (passValue.equals("")) {
                 passwordInput.setError("Isi data");
-            } else if (passwordInput!=confirmInput){
+            } else if (confirmValue.equals("")){
+                confirmInput.setError("Isi confirm password");
+            } else if (!passValue.equals(confirmValue)){
                 confirmInput.setError("Password harus sama");
             } else {
-                boolean success = session.validate(usernameValue, passValue, confirmValue);
-                if (success) {
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Snackbar.make(view, "Authentication Failed", Snackbar.LENGTH_SHORT).show();
+                boolean status = session.validate(usernameValue, passValue, confirmValue);
+                    if (status) {
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
-    }

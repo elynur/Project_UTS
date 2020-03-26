@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        session = Application.getSession();
-
+//        session = Application.getSession();
+        session = new Session(this);
         //logika untuk mengatur apabila telah ada session maka tidak diperlukan untuk melakukan login
         if (!session.isLoggedIn()) {
             Intent intent = new Intent(this, LoginActivity.class);

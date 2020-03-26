@@ -5,6 +5,7 @@ package id.ac.polinema.aplikasi_msi.Model;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class Session{
     private static final String USERNAME_KEY = "key_username";
