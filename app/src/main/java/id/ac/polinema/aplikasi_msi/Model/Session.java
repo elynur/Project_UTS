@@ -18,6 +18,10 @@ public class Session{
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
+    public Session(SharedPreferences preferences) {
+        this.preferences = preferences;
+    }
+
     public boolean isKeepUsername() {
         return preferences.getBoolean(KEEP_USERNAME_KEY, false);
     }

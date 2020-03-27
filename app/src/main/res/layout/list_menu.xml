@@ -16,7 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <ImageView
             android:layout_width="75dp"
@@ -37,15 +37,27 @@
             android:layout_toEndOf="@id/imageView"/>
 
         <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descriptinon"
+        android:id="@+id/descView"
+        android:textSize="15sp"
+        android:layout_toRightOf="@id/imageView"
+        android:layout_toEndOf="@id/imageView"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/titleView"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descriptinon"
-            android:id="@+id/descView"
+            android:text="Harga"
+            android:id="@+id/harga"
             android:textSize="15sp"
             android:layout_toRightOf="@id/imageView"
             android:layout_toEndOf="@id/imageView"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="44dp"
             android:layout_below="@id/titleView"/>
 
     </RelativeLayout>

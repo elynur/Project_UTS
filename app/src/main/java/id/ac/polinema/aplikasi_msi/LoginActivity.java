@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import id.ac.polinema.aplikasi_msi.Model.Session;
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String USERNAME_KEY = "username";
+
     public EditText usernameInput, passwordInput, confirmInput;
     public String usernameValue, passValue, confirmValue;
     private Session session;
@@ -29,28 +29,33 @@ public class LoginActivity extends AppCompatActivity {
         session = new Session(this);
     }
 
-        public void handleLogin (View view){
+        public void handleLogin (View view) {
             usernameValue = usernameInput.getText().toString();
             passValue = passwordInput.getText().toString();
             confirmValue = confirmInput.getText().toString();
 
-            if (usernameValue.equals("")){
+            if (usernameValue.equals("")) {
                 usernameInput.setError("Isi data");
             } else if (passValue.equals("")) {
                 passwordInput.setError("Isi data");
-            } else if (confirmValue.equals("")){
+            } else if (confirmValue.equals("")) {
                 confirmInput.setError("Isi confirm password");
-            } else if (!passValue.equals(confirmValue)){
+            } else if (!passValue.equals(confirmValue)) {
                 confirmInput.setError("Password harus sama");
             } else {
                 boolean status = session.validate(usernameValue, passValue, confirmValue);
-                    if (status) {
-                        Intent intent = new Intent(this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+                if (status) {
+                    if (session.isKeepUsername()) {
+                        session.setUsername(usernameValue);
                     }
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtra(USERNAME_KEY,usernameValue);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         }
+}

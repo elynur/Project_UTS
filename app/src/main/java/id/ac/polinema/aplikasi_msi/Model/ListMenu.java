@@ -4,11 +4,13 @@ public class ListMenu {
     public String img;
     public String judul;
     public String des;
+    public String harga;
 
-    public ListMenu(String img, String judul, String des) {
+    public ListMenu(String img, String judul, String des, String harga) {
         this.img = img;
         this.judul = judul;
         this.des = des;
+        this.harga = harga;
     }
 
     public String getImg() {
@@ -33,5 +35,13 @@ public class ListMenu {
 
     public void setDes(String des) {
         this.des = des;
+    }
+
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
     }
 }
