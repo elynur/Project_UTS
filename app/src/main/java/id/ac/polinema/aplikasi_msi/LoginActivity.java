@@ -1,12 +1,12 @@
 package id.ac.polinema.aplikasi_msi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import id.ac.polinema.aplikasi_msi.Model.Session;
 
@@ -58,4 +58,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }
+
+    public void handleReset(View view) {
+        usernameInput.setText("");
+        passwordInput.setText("");
+        confirmInput.setText("");
+    }
 }

@@ -1,21 +1,19 @@
 package id.ac.polinema.aplikasi_msi.Model;
 
-public class OrderModel {
+public class CartModels {
     public String title;
     public int harga;
     public  int totalOrder;
     public int jumlahPesanan, image;
     public String desc;
-    public String key;
 
-    public OrderModel(String title, int harga, int totalOrder, int jumlahPesanan, int image, String desc, String key) {
+    public CartModels(String title, int harga, int totalOrder, int jumlahPesanan, int image, String desc) {
         this.title = title;
         this.harga = harga;
         this.totalOrder = totalOrder;
         this.jumlahPesanan = jumlahPesanan;
         this.image = image;
         this.desc = desc;
-        this.key = key;
     }
 
     public String getTitle() {
@@ -64,13 +62,5 @@ public class OrderModel {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 }

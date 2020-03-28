@@ -17,21 +17,28 @@
     <FrameLayout
         android:id="@+id/changeFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
     </FrameLayout>
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#E6B4B4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_home"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/homee"
             android:onClick="handleHome"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +48,7 @@
             android:id="@+id/btn_menu"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/menu"
             android:onClick="handleMenu"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,11 +60,10 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/cart"
             android:onClick="handleCart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import id.ac.polinema.aplikasi_msi.Fragment.CartFragment;
 import id.ac.polinema.aplikasi_msi.Fragment.HomeFragment;
-import id.ac.polinema.aplikasi_msi.Fragment.MenuFragment;
+import id.ac.polinema.aplikasi_msi.Fragment.OrderFragment;
 import id.ac.polinema.aplikasi_msi.Model.Session;
 
 public class MainActivity extends AppCompatActivity {
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         public void handleMenu (View view){
             Fragment fragmentManager = getSupportFragmentManager().findFragmentById(R.id.changeFrame);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.changeFrame, new MenuFragment());
+            fragmentTransaction.replace(R.id.changeFrame, new OrderFragment());
             fragmentTransaction.commit();
         }
 
