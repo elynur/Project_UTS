@@ -1,7 +1,7 @@
 package id.ac.polinema.aplikasi_msi.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import id.ac.polinema.aplikasi_msi.Fragment.CartFragment;
 import id.ac.polinema.aplikasi_msi.Interface.ItemClickListener;
 import id.ac.polinema.aplikasi_msi.MainActivity;
 import id.ac.polinema.aplikasi_msi.Model.OrderModels;
@@ -52,6 +54,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.orderDet.setText(String.valueOf(order));
         holder.descGet.setText(menuModels.getgDesc());
 
+        final Bundle bundle = new Bundle();
+        final CartFragment fragment = new CartFragment();
+
         holder.incOrdered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,14 +79,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 if(order != 0){
-                    Intent i = new Intent(c, MainActivity.class);
-                    i.putExtra("iTitle",menuModels.getgTitle());
-                    i.putExtra("image",menuModels.getgImg());
-                    i.putExtra("jumlah",order);
-                    i.putExtra("harga",menuModels.getgHarga());
-                    i.putExtra("desc",menuModels.getgDesc());
-                    i.putExtra("status",3);
-                    c.startActivity(i);
+                    //ni buat apa
+                    MainActivity act = (MainActivity) v.getContext();
+                    FragmentTransaction fragmentTransaction = act.getSupportFragmentManager().beginTransaction();
+                    bundle.putString("title",menuModels.getgTitle());
+                    fragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.changeFrame, fragment);
+                    fragmentTransaction.commit();
                 }
                 else{
                     Toast.makeText(c,"Order Minimal 1 Item",Toast.LENGTH_SHORT).show();

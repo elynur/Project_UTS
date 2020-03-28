@@ -27,7 +27,6 @@ public class OrderFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,9 +34,9 @@ public class OrderFragment extends Fragment {
         View view;
         view= inflater.inflate(R.layout.fragment_order, container, false);
 
-        OrderModels menuModels = new OrderModels(R.drawable.aloevera, 10000,"MSI", "hmmmmmmm");
+        OrderModels menuModels = new OrderModels(R.drawable.aloevera, 10000,"Aloevere", "hmmmmmmm");
         data.add(menuModels);
-        menuModels = new OrderModels(R.drawable.lotion, 10000,"MSI", "hmmmmmmm");
+        menuModels = new OrderModels(R.drawable.lotion, 10000,"Lotion", "hmmmmmmm");
         data.add(menuModels);
         menuModels = new OrderModels(R.drawable.facemist, 10000,"MSI", "hmmmmmmm");
         data.add(menuModels);
