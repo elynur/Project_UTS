@@ -25,16 +25,16 @@
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
+            android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/titleView"
-            android:text="Title"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:paddingLeft="25dp"
+            android:layout_toEndOf="@id/imageView"
             android:layout_toRightOf="@id/imageView"
-            android:textStyle="bold"
-            android:layout_toEndOf="@id/imageView"/>
+            android:paddingLeft="25dp"
+            android:text="Title"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Harga"
-            android:id="@+id/harga"
+            android:id="@+id/priceView"
             android:textSize="15sp"
             android:layout_toRightOf="@id/imageView"
             android:layout_toEndOf="@id/imageView"

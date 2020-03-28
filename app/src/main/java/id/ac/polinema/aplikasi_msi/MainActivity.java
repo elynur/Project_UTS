@@ -1,18 +1,19 @@
 package id.ac.polinema.aplikasi_msi;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import id.ac.polinema.aplikasi_msi.Fragment.CartFragment;
 import id.ac.polinema.aplikasi_msi.Fragment.HomeFragment;
+import id.ac.polinema.aplikasi_msi.Fragment.MenuFragment;
 import id.ac.polinema.aplikasi_msi.Model.Session;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Intent i;
     Bundle bundle;
     HomeFragment fragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             i = getIntent();
             //Mengisi username value dengan data dari Intent
             usernameValue = i.getStringExtra("username");
+
             //logika untuk mengatur apabila telah ada session maka tidak diperlukan untuk melakukan login
             if (!session.isLoggedIn()) {
                 Intent intent = new Intent(this, LoginActivity.class);
