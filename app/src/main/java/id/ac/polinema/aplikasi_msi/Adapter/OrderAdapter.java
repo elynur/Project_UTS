@@ -29,6 +29,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     Context c;
 
     private int order = 0;
+    private int last_position = -1;
 
     public OrderAdapter(Context c, List<OrderModels> data) {
         this.data = data;
@@ -44,8 +45,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final OrderModels menuModels = data.get(position);
+
 
         holder.imGetData.setImageResource(menuModels.getgImg());
         holder.titleGetData.setText(menuModels.getgTitle());
@@ -60,6 +62,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.incOrdered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(last_position == -1 || last_position != position){
+                    last_position = position;
+                    order = 0;
+                }
+                else{
+                    order = order;
+                }
                 order += 1;
                 holder.orderDet.setText(String.valueOf(order));
             }
@@ -67,6 +76,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.decOrdered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(last_position == -1 || last_position != position){
+                    last_position = position;
+                    order = 0;
+                }
+                else{
+                    order = order;
+                }
                 order -= 1;
                 if(order == 0 || order < 0) {
                     order = 0;
@@ -83,6 +99,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     MainActivity act = (MainActivity) v.getContext();
                     FragmentTransaction fragmentTransaction = act.getSupportFragmentManager().beginTransaction();
                     bundle.putString("title",menuModels.getgTitle());
+                    int totalOrder = menuModels.getgHarga() * order;
+                    bundle.putInt("totalOrder",totalOrder);
+                    bundle.putInt("harga", menuModels.getgHarga());
+                    bundle.putInt("img", menuModels.getgImg());
+                    bundle.putInt("jumlah",order);
+                    bundle.putString("desc", menuModels.getgDesc());
                     fragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.changeFrame, fragment);
                     fragmentTransaction.commit();

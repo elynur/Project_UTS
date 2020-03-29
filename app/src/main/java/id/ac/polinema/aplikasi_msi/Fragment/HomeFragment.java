@@ -15,9 +15,6 @@ import id.ac.polinema.aplikasi_msi.R;
 public class HomeFragment extends Fragment {
     private TextView username;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
     public HomeFragment() {
         // Required empty public constructor
     }
