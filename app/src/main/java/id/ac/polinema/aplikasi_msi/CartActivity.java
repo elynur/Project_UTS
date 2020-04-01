@@ -3,6 +3,7 @@ package id.ac.polinema.aplikasi_msi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,10 @@ public class CartActivity extends AppCompatActivity {
         final List<OrderModels> cart = session.getCart();
         final CartAdapter adapter = new CartAdapter(this,cart);
         recyclerView.setAdapter(adapter);
+        
+        if(cart.size() == 0){
+            Toast.makeText(this, "cart masih kosong kaka, gamau beli nih ?", Toast.LENGTH_SHORT).show();
+        }
 
         final ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -43,10 +48,15 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int index = viewHolder.getAdapterPosition();
+                //ini kenapa kok gini ?
+                //apannya yg kenapa
                 cart.remove(index);
+//                adapter.removeCart(index);
                 adapter.notifyDataSetChanged();
+                adapter.removeSession(CartActivity.this);
             }
         };
+        //sama aku juga laper
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
@@ -61,6 +71,7 @@ public class CartActivity extends AppCompatActivity {
     public void handleMenu (View view){
         Intent intent = new Intent(CartActivity.this, OrderActivity.class);
         startActivity(intent);
+
     }
 
     public void handleCart (View view){

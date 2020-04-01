@@ -45,15 +45,18 @@ public class OrderActivity extends AppCompatActivity {
     public void handleHome (View view){
         Intent intent = new Intent(OrderActivity.this, MainActivity.class);
         startActivity(intent);
+
     }
 
     public void handleMenu (View view){
         Intent intent = new Intent(OrderActivity.this, OrderActivity.class);
         startActivity(intent);
+
     }
 
     public void handleCart (View view){
         Intent intent = new Intent(OrderActivity.this, CartActivity.class);
         startActivity(intent);
+
     }
 }

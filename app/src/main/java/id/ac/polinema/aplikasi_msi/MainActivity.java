@@ -25,11 +25,9 @@ public class MainActivity extends AppCompatActivity {
         session = new Session(this);
         usernameValue = findViewById(R.id.text_home);
 
-        Bundle bundle = getIntent().getExtras();
-        String username = bundle.getString("username");
-        if (bundle != null){
-            usernameValue.setText("Hallo " +username+ " !");
-        }
+
+        String username = getIntent().getStringExtra("username");
+        usernameValue.setText("Hallo " +username+ " !");
 
         //logika untuk mengatur apabila telah ada session maka tidak diperlukan untuk melakukan login
         if (!session.isLoggedIn()) {
@@ -42,16 +40,20 @@ public class MainActivity extends AppCompatActivity {
     public void handleHome (View view){
         Intent intent = new Intent(MainActivity.this, MainActivity.class);
         startActivity(intent);
+
     }
 
     public void handleMenu (View view){
         Intent intent = new Intent(MainActivity.this, OrderActivity.class);
         startActivity(intent);
+
+
     }
 
     public void handleCart (View view){
         Intent intent = new Intent(MainActivity.this, CartActivity.class);
         startActivity(intent);
+
     }
 
     @Override

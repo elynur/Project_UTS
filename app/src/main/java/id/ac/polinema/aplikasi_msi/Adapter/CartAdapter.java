@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,11 +32,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public void addCart(OrderModels cart, Context context){
+        checkSesion(context);
         if (data == null){
             data = new ArrayList<>();
-        }
-        if (session == null){
-            session = new Session(context);
         }
         if (session.getCart().size() >0 ){
             data = session.getCart();
@@ -46,11 +43,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         session.addCart(data);
     }
 
-    public void removeCart(int index){
-        data = new ArrayList<>();
-        data.remove(index);
-//        session.removeCart(data);
-        session.addCart(data);
+    private void checkSesion(Context context){
+        if (session == null){
+            session = new Session(context);
+        }
+    }
+
+    public void removeSession(Context context){
+        checkSesion(context);
+        if (data != null) {
+            session.addCart(data);
+        }
     }
 
     @NonNull
@@ -83,7 +86,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView titleOrder , descOrder , hargaOrder ,totalOrderHarga,textOrder;
         public ImageView imgOrder;
-        public Button btnCancelOrder, btnMinusOr, btnPlusOr;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,9 +96,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             hargaOrder = itemView.findViewById(R.id.hargaOrdered);
             textOrder = itemView.findViewById(R.id.textOrdered);
             totalOrderHarga = itemView.findViewById(R.id.totalOrderProc);
-//            btnCancelOrder = itemView.findViewById(R.id.btnDelOrder);
-////            btnMinusOr = itemView.findViewById(R.id.btnMinusOrdered);
-////            btnPlusOr = itemView.findViewById(R.id.btnPlusOrdered);
         }
     }
 }

@@ -31,11 +31,6 @@ public class Session{
         preferences.edit().putString(KEY_CART, json).apply();
     }
 
-    public void removeCart(List<OrderModels> list){
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        preferences.edit().putString(KEY_CART, json).apply();
-    }
 
     public List<OrderModels> getCart(){
         Gson gson = new Gson();

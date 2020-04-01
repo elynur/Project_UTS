@@ -90,8 +90,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 if (orderArray.orderSave[position] != 0) {
                     Toast.makeText(context, "OrderSucces", Toast.LENGTH_SHORT).show();
 
-                    //Semangat Yaaa :} wkwkkwkw
-                    //Maaf ya lama :( susah soalnya, aku ada kelas dulu nanti aku benerin lagi :*
                     item.setJumlahPesan(Integer.parseInt(holder.orderDet.getText().toString()));
                     cartAdapter.addCart(item, context);
                 }
