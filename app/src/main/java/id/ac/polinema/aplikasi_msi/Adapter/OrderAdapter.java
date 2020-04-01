@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,15 +29,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     ArraySaveOrder orderArray;
 
+    CartAdapter cartAdapter;
+
     //Sebuah listener yang telah didefinisikan sebelumnya.
 //    private ItemClickListener listener;
-
 
     public OrderAdapter(Context context, List<OrderModels> items) {
         this.context = context;
         this.items = items;
         this.orderArray = new ArraySaveOrder(this.items.size());
 //        this.listener = listener;
+        cartAdapter = new CartAdapter();
     }
 
 
@@ -90,7 +91,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     Toast.makeText(context, "OrderSucces", Toast.LENGTH_SHORT).show();
 
                     //Semangat Yaaa :} wkwkkwkw
-
+                    //Maaf ya lama :( susah soalnya, aku ada kelas dulu nanti aku benerin lagi :*
+                    item.setJumlahPesan(Integer.parseInt(holder.orderDet.getText().toString()));
+                    cartAdapter.addCart(item, context);
                 }
 
             }
@@ -103,9 +106,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView titleGetData, hargaGetData, rpGetData, descGet;
+        public TextView titleGetData, hargaGetData, rpGetData, descGet, orderDet;
         public ImageView imGetData;
-        public EditText orderDet;
         public Button incOrdered, decOrdered, orderedOkay;
 //        ItemClickListener itemClickListener;
 

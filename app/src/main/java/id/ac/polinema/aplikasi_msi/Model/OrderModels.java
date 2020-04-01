@@ -3,9 +3,17 @@ package id.ac.polinema.aplikasi_msi.Model;
 public class OrderModels {
     public int gImg;
     public int gHarga;
-
     public String gTitle, gDesc;
 
+    public int jumlahPesan;
+
+    public int getJumlahPesan() {
+        return jumlahPesan;
+    }
+
+    public void setJumlahPesan(int jumlahPesan) {
+        this.jumlahPesan = jumlahPesan;
+    }
 
     public OrderModels(int gImg, int gHarga, String gTitle, String gDesc) {
         this.gImg = gImg;

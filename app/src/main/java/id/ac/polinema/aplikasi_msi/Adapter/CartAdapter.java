@@ -5,27 +5,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import id.ac.polinema.aplikasi_msi.Model.CartModels;
+import id.ac.polinema.aplikasi_msi.Model.OrderModels;
+import id.ac.polinema.aplikasi_msi.Model.Session;
 import id.ac.polinema.aplikasi_msi.R;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    public List<CartModels> data;
+    public List<OrderModels> data;
     LayoutInflater layoutInflater;
     Context c;
+    Session session;
 
-    public CartAdapter(Context c, List<CartModels> data) {
+    public CartAdapter(){};
+
+    public CartAdapter(Context c, List<OrderModels> data) {
         this.data = data;
         this.c = c;
         this.layoutInflater = LayoutInflater.from(this.c);
+    }
+
+    public void addCart(OrderModels cart, Context context){
+        if (data == null){
+            data = new ArrayList<>();
+        }
+        if (session == null){
+            session = new Session(context);
+        }
+        if (session.getCart().size() >0 ){
+            data = session.getCart();
+        }
+        data.add(cart);
+        session.addCart(data);
+    }
+
+    public void removeCart(int index){
+        data = new ArrayList<>();
+        data.remove(index);
+//        session.removeCart(data);
+        session.addCart(data);
     }
 
     @NonNull
@@ -37,15 +62,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
-        final CartModels cartModels = data.get(position);
+//        final CartModels cartModels = data.get(position);
+        OrderModels orderModels = data.get(position);
         final int sum = 0;
 
-        holder.titleOrder.setText(cartModels.getTitle());
-        holder.imgOrder.setImageResource(cartModels.getImage());
-        holder.descOrder.setText(cartModels.getDesc());
-        holder.hargaOrder.setText(String.valueOf(cartModels.getHarga()));
-        holder.textOrder.setText(String.valueOf(cartModels.getJumlahPesanan()));
-        holder.totalOrderHarga.setText(String.valueOf(cartModels.getTotalOrder()));
+        holder.titleOrder.setText(orderModels.getgTitle());
+        holder.imgOrder.setImageResource(orderModels.getgImg());
+        holder.descOrder.setText(orderModels.getgDesc());
+        holder.hargaOrder.setText(String.valueOf(orderModels.getgHarga()));
+        holder.textOrder.setText(String.valueOf(orderModels.getJumlahPesan()));
+        holder.totalOrderHarga.setText(String.valueOf(orderModels.getgHarga() * orderModels.getJumlahPesan() ));
+
     }
 
     @Override
@@ -54,9 +81,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView titleOrder , descOrder , hargaOrder ,totalOrderHarga;
+        public TextView titleOrder , descOrder , hargaOrder ,totalOrderHarga,textOrder;
         public ImageView imgOrder;
-        public EditText textOrder;
         public Button btnCancelOrder, btnMinusOr, btnPlusOr;
 
         public ViewHolder(@NonNull View itemView) {
@@ -68,9 +94,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             hargaOrder = itemView.findViewById(R.id.hargaOrdered);
             textOrder = itemView.findViewById(R.id.textOrdered);
             totalOrderHarga = itemView.findViewById(R.id.totalOrderProc);
-            btnCancelOrder = itemView.findViewById(R.id.btnDelOrder);
-            btnMinusOr = itemView.findViewById(R.id.btnMinusOrdered);
-            btnPlusOr = itemView.findViewById(R.id.btnPlusOrdered);
+//            btnCancelOrder = itemView.findViewById(R.id.btnDelOrder);
+////            btnMinusOr = itemView.findViewById(R.id.btnMinusOrdered);
+////            btnPlusOr = itemView.findViewById(R.id.btnPlusOrdered);
         }
     }
 }

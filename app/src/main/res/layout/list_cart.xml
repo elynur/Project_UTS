@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="250dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="9dp"
         app:cardElevation="3dp"
@@ -99,62 +99,40 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp">
-
-                <Button
-                    android:id="@+id/btnPlusOrdered"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/btnMinusOrdered"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="+"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
-
-                <Button
-                    android:id="@+id/btnMinusOrdered"
-                    android:layout_width="80dp"
-                    android:layout_toRightOf="@id/textOrdered"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/detailOrdered"
                     android:layout_width="wrap_content"
                     android:textColor="#FFFFFF"
                     android:text="Order    : "
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="5dp"
                     android:textStyle="bold"
                     android:layout_height="wrap_content">
                 </TextView>
 
-                <EditText
+                <TextView
                     android:id="@+id/textOrdered"
                     android:layout_width="50dp"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
-                    android:textSize="25sp"
+                    android:textSize="20dp"
                     android:gravity="center"
                     android:background="@null"
                     android:layout_toRightOf="@id/detailOrdered"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content">
-                </EditText>
+                </TextView>
 
                 <TextView
                     android:id="@+id/setTotal"
                     android:textColor="#FFFFFF"
                     android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textOrdered"
                     android:text="Total     :"
@@ -166,7 +144,7 @@
                     android:textColor="#FFFFFF"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textOrdered"
                     android:layout_toRightOf="@id/setTotal"
@@ -180,7 +158,7 @@
                     android:textColor="#FFFFFF"
                     android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textOrdered"
@@ -188,14 +166,6 @@
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
-                <Button
-                    android:id="@+id/btnDelOrder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Cancel Ordered"
-                    android:textStyle="bold"
-                    android:layout_below="@id/totalOrderProc"/>
 
             </RelativeLayout>
 
