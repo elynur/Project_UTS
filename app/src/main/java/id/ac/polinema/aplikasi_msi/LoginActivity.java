@@ -29,35 +29,35 @@ public class LoginActivity extends AppCompatActivity {
         session = new Session(this);
     }
 
-        public void handleLogin (View view) {
-            usernameValue = usernameInput.getText().toString();
-            passValue = passwordInput.getText().toString();
-            confirmValue = confirmInput.getText().toString();
+    public void handleLogin (View view) {
+        usernameValue = usernameInput.getText().toString();
+        passValue = passwordInput.getText().toString();
+        confirmValue = confirmInput.getText().toString();
 
-            if (usernameValue.equals("")) {
-                usernameInput.setError("Isi data");
-            } else if (passValue.equals("")) {
-                passwordInput.setError("Isi data");
-            } else if (confirmValue.equals("")) {
-                confirmInput.setError("Isi confirm password");
-            } else if (!passValue.equals(confirmValue)) {
-                confirmInput.setError("Password harus sama");
-            } else {
-                boolean status = session.validate(usernameValue, passValue, confirmValue);
-                if (status) {
-                    if (session.isKeepUsername()) {
-                        session.setUsername(usernameValue);
-                    }
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra(USERNAME_KEY,usernameValue);
-                    startActivity(intent);
-                    finish();
-
-                } else {
-                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+        if (usernameValue.equals("")) {
+            usernameInput.setError("Isi data");
+        } else if (passValue.equals("")) {
+            passwordInput.setError("Isi data");
+        } else if (confirmValue.equals("")) {
+            confirmInput.setError("Isi confirm password");
+        } else if (!passValue.equals(confirmValue)) {
+            confirmInput.setError("Password harus sama");
+        } else {
+            boolean status = session.validate(usernameValue, passValue, confirmValue);
+            if (status) {
+                if (session.isKeepUsername()) {
+                    session.setUsername(usernameValue);
                 }
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra(USERNAME_KEY,usernameValue);
+                startActivity(intent);
+                finish();
+
+            } else {
+                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
             }
         }
+    }
 
     public void handleReset(View view) {
         usernameInput.setText("");

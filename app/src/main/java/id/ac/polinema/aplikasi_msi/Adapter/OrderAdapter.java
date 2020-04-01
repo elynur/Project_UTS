@@ -12,126 +12,105 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import id.ac.polinema.aplikasi_msi.Fragment.CartFragment;
-import id.ac.polinema.aplikasi_msi.Interface.ItemClickListener;
-import id.ac.polinema.aplikasi_msi.MainActivity;
+import id.ac.polinema.aplikasi_msi.Array.ArraySaveOrder;
 import id.ac.polinema.aplikasi_msi.Model.OrderModels;
 import id.ac.polinema.aplikasi_msi.R;
 
+
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
-    public List<OrderModels> data;
-    LayoutInflater layoutInflater;
-    Context c;
 
-    private int order = 0;
-    private int last_position = -1;
+    private static final String ORDER_KEY = "order";
+    //atribut list data dari model yg akan ditampilkan
+    private Context context;
+    private List<OrderModels> items;
 
-    public OrderAdapter(Context c, List<OrderModels> data) {
-        this.data = data;
-        this.c = c;
-        this.layoutInflater = LayoutInflater.from(this.c);
+    ArraySaveOrder orderArray;
+
+    //Sebuah listener yang telah didefinisikan sebelumnya.
+//    private ItemClickListener listener;
+
+
+    public OrderAdapter(Context context, List<OrderModels> items) {
+        this.context = context;
+        this.items = items;
+        this.orderArray = new ArraySaveOrder(this.items.size());
+//        this.listener = listener;
     }
+
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.list_order,parent,false);
+    public OrderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.list_order, parent, false);
         return new ViewHolder(view);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        final OrderModels menuModels = data.get(position);
+        Bundle bundle = new Bundle();
+        bundle.getParcelable(ORDER_KEY);
 
-
-        holder.imGetData.setImageResource(menuModels.getgImg());
-        holder.titleGetData.setText(menuModels.getgTitle());
-        holder.hargaGetData.setText(String.valueOf(menuModels.getgHarga()));
+        final OrderModels item = items.get(position);
+        holder.imGetData.setImageResource(item.getgImg());
+        holder.titleGetData.setText(item.getgTitle());
+        holder.hargaGetData.setText(String.valueOf(item.getgHarga()));
         holder.rpGetData.setText("Rp. ");
-        holder.orderDet.setText(String.valueOf(order));
-        holder.descGet.setText(menuModels.getgDesc());
-
-        final Bundle bundle = new Bundle();
-        final CartFragment fragment = new CartFragment();
+        holder.orderDet.setText(String.valueOf(orderArray.orderSave[position]));
+        holder.descGet.setText(item.getgDesc());
 
         holder.incOrdered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(last_position == -1 || last_position != position){
-                    last_position = position;
-                    order = 0;
-                }
-                else{
-                    order = order;
-                }
-                order += 1;
-                holder.orderDet.setText(String.valueOf(order));
+                orderArray.orderSave[position] += 1;
+                holder.orderDet.setText(String.valueOf(orderArray.orderSave[position]));
             }
         });
         holder.decOrdered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(last_position == -1 || last_position != position){
-                    last_position = position;
-                    order = 0;
+                orderArray.orderSave[position] -= 1;
+                if (orderArray.orderSave[position] < 0) {
+                    orderArray.orderSave[position] = 0;
                 }
-                else{
-                    order = order;
-                }
-                order -= 1;
-                if(order == 0 || order < 0) {
-                    order = 0;
-                }
-                holder.orderDet.setText(String.valueOf(order));
+                holder.orderDet.setText(String.valueOf(orderArray.orderSave[position]));
             }
         });
 
         holder.orderedOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(order != 0){
-                    //ni buat apa
-                    MainActivity act = (MainActivity) v.getContext();
-                    FragmentTransaction fragmentTransaction = act.getSupportFragmentManager().beginTransaction();
-                    bundle.putString("title",menuModels.getgTitle());
-                    int totalOrder = menuModels.getgHarga() * order;
-                    bundle.putInt("totalOrder",totalOrder);
-                    bundle.putInt("harga", menuModels.getgHarga());
-                    bundle.putInt("img", menuModels.getgImg());
-                    bundle.putInt("jumlah",order);
-                    bundle.putString("desc", menuModels.getgDesc());
-                    fragment.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.changeFrame, fragment);
-                    fragmentTransaction.commit();
+                if (orderArray.orderSave[position] != 0) {
+                    Toast.makeText(context, "OrderSucces", Toast.LENGTH_SHORT).show();
+
+                    //Semangat Yaaa :} wkwkkwkw
+
                 }
-                else{
-                    Toast.makeText(c,"Order Minimal 1 Item",Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return (data != null) ? data.size() : 0;
+        return (items != null ) ? items.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView titleGetData, hargaGetData, rpGetData, descGet;
         public ImageView imGetData;
         public EditText orderDet;
         public Button incOrdered, decOrdered, orderedOkay;
-        ItemClickListener itemClickListener;
+//        ItemClickListener itemClickListener;
 
-
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-
             titleGetData = itemView.findViewById(R.id.titleGet);
             hargaGetData = itemView.findViewById(R.id.hargaGet);
             imGetData = itemView.findViewById(R.id.imageGet);
@@ -141,17 +120,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             orderDet = itemView.findViewById(R.id.textGet);
             descGet = itemView.findViewById(R.id.descGet);
             orderedOkay = itemView.findViewById(R.id.btnOrder);
-
-            itemView.setOnClickListener(this);
-
-        }
-        @Override
-        public void onClick(View view) {
-            this.itemClickListener.onItemClick(view,getLayoutPosition());
+//            itemView.setOnClickListener(this);
         }
 
-        public void setItemClickListener(ItemClickListener ic){
-            this.itemClickListener = ic;
-        }
-        }
+//        @Override
+//        public void onClick(View view) {
+//            this.itemClickListener.onItemClick(view, getLayoutPosition());
+//        }
+//
+//        public void setItemClickListener(ItemClickListener ic) {
+//            this.itemClickListener = ic;
+//        }
+//    }
+
+    }
 }
