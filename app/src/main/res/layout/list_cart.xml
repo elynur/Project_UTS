@@ -126,7 +126,7 @@
                     android:background="@null"
                     android:layout_toRightOf="@id/detailOrdered"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_height="wrap_content">
                 </TextView>
 

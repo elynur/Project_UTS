@@ -2,6 +2,8 @@ package id.ac.polinema.aplikasi_msi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +20,7 @@ import id.ac.polinema.aplikasi_msi.Model.OrderModels;
 import id.ac.polinema.aplikasi_msi.Model.Session;
 
 public class CartActivity extends AppCompatActivity {
-
+    private Session session;
     private RecyclerView recyclerView;
 
     @Override
@@ -27,7 +29,13 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         recyclerView = findViewById(R.id.rv_cart);
-        Session session = new Session(this);
+        session = new Session(this);
+        //logika untuk mengatur apabila telah ada session maka tidak diperlukan untuk melakukan login
+        if (!session.isLoggedIn()) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 //
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setAdapter(adapter);
@@ -48,17 +56,18 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int index = viewHolder.getAdapterPosition();
-                //ini kenapa kok gini ?
-                //apannya yg kenapa
+
                 cart.remove(index);
 //                adapter.removeCart(index);
                 adapter.notifyDataSetChanged();
                 adapter.removeSession(CartActivity.this);
             }
         };
-        //sama aku juga laper
+
+
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
 
     }
 
@@ -77,5 +86,29 @@ public class CartActivity extends AppCompatActivity {
     public void handleCart (View view){
         Intent intent = new Intent(CartActivity.this, CartActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (@NonNull MenuItem item){
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_logout) {
+            session.logout();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return false;
     }
 }

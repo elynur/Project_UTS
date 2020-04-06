@@ -92,6 +92,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
                     item.setJumlahPesan(Integer.parseInt(holder.orderDet.getText().toString()));
                     cartAdapter.addCart(item, context);
+                } else{
+                    Toast.makeText(context, "Order minimal 1 item", Toast.LENGTH_SHORT).show();
                 }
 
             }

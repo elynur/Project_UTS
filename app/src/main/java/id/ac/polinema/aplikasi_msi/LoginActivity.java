@@ -35,9 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         confirmValue = confirmInput.getText().toString();
 
         if (usernameValue.equals("")) {
-            usernameInput.setError("Isi data");
+            usernameInput.setError("Isi data terlebih dahulu");
         } else if (passValue.equals("")) {
-            passwordInput.setError("Isi data");
+            passwordInput.setError("Isi data terlebih dahulu");
         } else if (confirmValue.equals("")) {
             confirmInput.setError("Isi confirm password");
         } else if (!passValue.equals(confirmValue)) {
@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             boolean status = session.validate(usernameValue, passValue, confirmValue);
             if (status) {
+                //
                 if (session.isKeepUsername()) {
                     session.setUsername(usernameValue);
                 }
